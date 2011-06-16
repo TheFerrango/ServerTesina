@@ -22,7 +22,7 @@
             <ul>
                 <li class="first"><a href="index.aspx">Home</a></li>
                 <li><a href="#">Su di noi</a></li>
-                <li><a href="#">Visualizza Stralci</a></li>
+                <li><a href="#">Contattaci</a></li>
             </ul>
         </div>
         <!-- end #menu -->
@@ -80,6 +80,9 @@
                                 NavigateUrl="~/visualizzaVari.aspx?tblInd=4"></asp:HyperLink>
                             <asp:Button ID="lgnButt" Text="LogIn" CausesValidation="true" runat="server" OnClick="lgnButt_Click"
                                 PostBackUrl="~/index.aspx" /></li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink5" runat="server" Text="Visualizza l'elenco dei traini"
+                                NavigateUrl="~/visualizzaTraini.aspx"></asp:HyperLink></li>
                     </ul>
                     <ul>
                         <li>

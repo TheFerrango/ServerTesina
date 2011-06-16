@@ -15,6 +15,7 @@ public class JsonHandler : IHttpHandler
             {
                 dbInteraction DBI = new dbInteraction();
                 JSONObject coop = JsonConvert.DeserializeObject<JSONObject>((string)context.Request["traino"]);
+                
                 //Piloti trainatori
                 DeSerializeSupport.ElaboraTrainatori(DBI, coop);
                 //Piloti alianti
@@ -29,6 +30,7 @@ public class JsonHandler : IHttpHandler
                 DeSerializeSupport.ElaboraSessioni(DBI, coop);
                 //Traini effettuati
                 DeSerializeSupport.ElaboraTraini(DBI, coop);
+                Log(DeSerializeSupport.Serializzo());
             }
             catch (Exception e)
             {
@@ -39,12 +41,13 @@ public class JsonHandler : IHttpHandler
             File.AppendAllText(@"C:\MS-DOS\coop.txt", "Succhia" + Environment.NewLine);
 
         context.Response.ContentType = "text/plain";
-        context.Response.Write("OK");
+        context.Response.Write("OK\n");
+        context.Response.Write(DeSerializeSupport.Serializzo());
     }
 
     public void Log(string text)
     {
-        File.AppendAllText(@"C:\MS-DOS\coop.txt", text + Environment.NewLine);
+        File.AppendAllText(@"C:\MS-DOS\VediamoSe.txt", text + Environment.NewLine);
     }
 
     public bool IsReusable

@@ -8,56 +8,56 @@ using System.Web;
 /// </summary>
 public class JSONObject
 {
-    private List<Pilota> pils; 
-    private List<Pilota> pilsAli; 
-    private List<Pilota> instructors; 
-    private List<ModelloAereo> aereiTrainanti;
-    private List<ModelloAereo> alianti;
-    private List<SessioneGiorno> sessioni;
-    private List<Traini> trainiEff;
+    private List<Pilota> Pils; 
+    private List<Pilota> PilsAli; 
+    private List<Pilota> Instructors; 
+    private List<ModelloAereo> AereiTrainanti;
+    private List<ModelloAereo> Alianti;
+    private List<SessioneGiorno> Sessioni;
+    private List<Traini> TrainiEff;
 
-    public List<Pilota> Pils
+    public List<Pilota> pils
     {
-        get { return pils; }
-        set { pils = value; }
+        get { return Pils; }
+        set { Pils = value; }
     }   
 
-    public List<Pilota> PilsAli
+    public List<Pilota> pilsAli
     {
-        get { return pilsAli; }
-        set { pilsAli = value; }
+        get { return PilsAli; }
+        set { PilsAli = value; }
     }
     
-    public List<Pilota> Instructors
+    public List<Pilota> instructors
     {
-        get { return instructors; }
-        set { instructors = value; }
+        get { return Instructors; }
+        set { Instructors = value; }
     }
     
-    public List<ModelloAereo> AereiTrainanti
+    public List<ModelloAereo> aereiTrainanti
     {
-        get { return aereiTrainanti; }
-        set { aereiTrainanti = value; }
+        get { return AereiTrainanti; }
+        set { AereiTrainanti = value; }
     }
     
-    public List<ModelloAereo> Alianti
+    public List<ModelloAereo> alianti
     {
-        get { return alianti; }
-        set { alianti = value; }
-    }
-    
-
-    public List<SessioneGiorno> Sessioni
-    {
-        get { return sessioni; }
-        set { sessioni = value; }
+        get { return Alianti; }
+        set { Alianti = value; }
     }
     
 
-    public List<Traini> TrainiEff
+    public List<SessioneGiorno> sessioni
     {
-        get { return trainiEff; }
-        set { trainiEff = value; }
+        get { return Sessioni; }
+        set { Sessioni = value; }
+    }
+    
+
+    public List<Traini> trainiEff
+    {
+        get { return TrainiEff; }
+        set { TrainiEff = value; }
     }
 
 	public JSONObject()
@@ -76,20 +76,20 @@ public class Pilota
 {
     private int _id;
 
-    public int Id
+    public int id
     {
         get { return _id; }
         set { _id = value; }
     }
     private string _nome, _cognome;
 
-    public string Cognome
+    public string cognome
     {
         get { return _cognome; }
         set { _cognome = value; }
     }
 
-    public string Nome
+    public string nome
     {
         get { return _nome; }
         set { _nome = value; }
@@ -151,14 +151,14 @@ public class ModelloAereo
 {
     private int _id;
 
-    public int Id
+    public int id
     {
         get { return _id; }
         set { _id = value; }
     }
     private string _model;
 
-    public string Model
+    public string model
     {
         get { return _model; }
         set { _model = value; }
@@ -166,7 +166,7 @@ public class ModelloAereo
 
     private string _code;
 
-    public string Code
+    public string code
     {
         get { return _code; }
         set { _code = value; }

@@ -43,7 +43,7 @@ public class dbInteraction
   public int AddPilot(Pilota pilo)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from Trainatore where nome like '" + pilo.Nome + "' and cognome like '" + pilo.Cognome + "'", _sqlConn);
+    SqlCommand sqlComm = new SqlCommand("Select * from Trainatore where nome like '" + pilo.nome + "' and cognome like '" + pilo.cognome + "'", _sqlConn);
     SqlDataReader sqr = sqlComm.ExecuteReader();
 
     if (sqr.HasRows)
@@ -58,8 +58,8 @@ public class dbInteraction
     sqlComm = new SqlCommand("insertPilot", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
 
-    sqlComm.Parameters.Add("nome", pilo.Nome);
-    sqlComm.Parameters.Add("cognome", pilo.Cognome);
+    sqlComm.Parameters.Add("nome", pilo.nome);
+    sqlComm.Parameters.Add("cognome", pilo.cognome);
     sqlComm.ExecuteNonQuery();
     Close();
     return -1;
@@ -68,7 +68,7 @@ public class dbInteraction
   public int AddPilotAliante(Pilota pilo)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from Pilota where nome like '" + pilo.Nome + "' and cognome like '" + pilo.Cognome + "'", _sqlConn);
+    SqlCommand sqlComm = new SqlCommand("Select * from Pilota where nome like '" + pilo.nome + "' and cognome like '" + pilo.cognome + "'", _sqlConn);
     SqlDataReader sqr = sqlComm.ExecuteReader();
 
     if (sqr.HasRows)
@@ -83,8 +83,8 @@ public class dbInteraction
     sqlComm = new SqlCommand("insertPilotAliante", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
 
-    sqlComm.Parameters.Add("nome", pilo.Nome);
-    sqlComm.Parameters.Add("cognome", pilo.Cognome);
+    sqlComm.Parameters.Add("nome", pilo.nome);
+    sqlComm.Parameters.Add("cognome", pilo.cognome);
     sqlComm.ExecuteNonQuery();
     Close();
     return -1;
@@ -93,7 +93,7 @@ public class dbInteraction
   public int AddInstructor(Pilota pilo)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from Istruttore where nome like '" + pilo.Nome + "' and cognome like '" + pilo.Cognome + "'", _sqlConn);
+    SqlCommand sqlComm = new SqlCommand("Select * from Istruttore where nome like '" + pilo.nome + "' and cognome like '" + pilo.cognome + "'", _sqlConn);
     SqlDataReader sqr = sqlComm.ExecuteReader();
 
     if (sqr.HasRows)
@@ -108,8 +108,8 @@ public class dbInteraction
     sqlComm = new SqlCommand("insertIstruttore", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
 
-    sqlComm.Parameters.Add("nome", pilo.Nome);
-    sqlComm.Parameters.Add("cognome", pilo.Cognome);
+    sqlComm.Parameters.Add("nome", pilo.nome);
+    sqlComm.Parameters.Add("cognome", pilo.cognome);
     sqlComm.ExecuteNonQuery();
     Close();
     return -1;
@@ -118,7 +118,7 @@ public class dbInteraction
   public int AddModAliante(ModelloAereo mod)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from ModelloAliante where Codice like '" + mod.Code + "'", _sqlConn);
+    SqlCommand sqlComm = new SqlCommand("Select * from ModelloAliante where Codice like '" + mod.code + "'", _sqlConn);
     SqlDataReader sqr = sqlComm.ExecuteReader();
 
     if (sqr.HasRows)
@@ -132,9 +132,9 @@ public class dbInteraction
     sqr.Close();
     sqlComm = new SqlCommand("insertModelloAliante", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
-    sqlComm.Parameters.Add("codice", mod.Code);
+    sqlComm.Parameters.Add("codice", mod.code);
 
-    sqlComm.Parameters.Add("modello", mod.Model);
+    sqlComm.Parameters.Add("modello", mod.model);
 
     sqlComm.ExecuteNonQuery();
     Close();
@@ -144,7 +144,7 @@ public class dbInteraction
   public int AddModTrainatore(ModelloAereo mod)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from ModelloTrainatore where Codice like '" + mod.Code + "'", _sqlConn);
+    SqlCommand sqlComm = new SqlCommand("Select * from ModelloTrainatore where Codice like '" + mod.code + "'", _sqlConn);
     SqlDataReader sqr = sqlComm.ExecuteReader();
 
     if (sqr.HasRows)
@@ -159,8 +159,8 @@ public class dbInteraction
     sqlComm = new SqlCommand("insertModelloTrainatore", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
 
-    sqlComm.Parameters.Add("codice", mod.Code);
-    sqlComm.Parameters.Add("modello", mod.Model);
+    sqlComm.Parameters.Add("codice", mod.code);
+    sqlComm.Parameters.Add("modello", mod.model);
     sqlComm.ExecuteNonQuery();
     Close();
     return -1;
@@ -245,7 +245,7 @@ public class dbInteraction
   {
     Connect();
     DataTable dt = new DataTable();
-    SqlCommand sqlComm = new SqlCommand("Select ID, Cognome, Nome FROM " + table, _sqlConn);
+    SqlCommand sqlComm = new SqlCommand("Select ID, Nome, Cognome FROM " + table, _sqlConn);
     dt.Load(sqlComm.ExecuteReader());
     Close();
     return dt;
@@ -287,7 +287,4 @@ public class dbInteraction
   {
     File.AppendAllText(@"C:\MS-DOS\coop.txt", text + Environment.NewLine);
   }
-
-
-
 }

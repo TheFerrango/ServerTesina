@@ -118,7 +118,7 @@ public class dbInteraction
     public int AddModAliante(ModelloAereo mod)
     {
         Connect();
-        SqlCommand sqlComm = new SqlCommand("Select * from ModelloAliante where modello like '" + mod.Model + "'", _sqlConn);
+        SqlCommand sqlComm = new SqlCommand("Select * from ModelloAliante where Codice like '" + mod.Code + "'", _sqlConn);
         SqlDataReader sqr = sqlComm.ExecuteReader();
 
         if (sqr.HasRows)
@@ -132,8 +132,10 @@ public class dbInteraction
         sqr.Close();
         sqlComm = new SqlCommand("insertModelloAliante", _sqlConn);
         sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
+        sqlComm.Parameters.Add("codice", mod.Code);
 
         sqlComm.Parameters.Add("modello", mod.Model);
+
         sqlComm.ExecuteNonQuery();
         Close();
         return -1;
@@ -142,7 +144,7 @@ public class dbInteraction
     public int AddModTrainatore(ModelloAereo mod)
     {
         Connect();
-        SqlCommand sqlComm = new SqlCommand("Select * from ModelloTrainatore where modello like '" + mod.Model + "'", _sqlConn);
+        SqlCommand sqlComm = new SqlCommand("Select * from ModelloTrainatore where Codice like '" + mod.Code + "'", _sqlConn);
         SqlDataReader sqr = sqlComm.ExecuteReader();
 
         if (sqr.HasRows)
@@ -157,6 +159,7 @@ public class dbInteraction
         sqlComm = new SqlCommand("insertModelloTrainatore", _sqlConn);
         sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
 
+        sqlComm.Parameters.Add("codice", mod.Code);
         sqlComm.Parameters.Add("modello", mod.Model);
         sqlComm.ExecuteNonQuery();
         Close();
@@ -252,12 +255,11 @@ public class dbInteraction
     {
         Connect();
         DataTable dt = new DataTable();
-        SqlCommand sqlComm = new SqlCommand("Select Modello FROM " + table, _sqlConn);
+        SqlCommand sqlComm = new SqlCommand("Select Codice, Modello FROM " + table, _sqlConn);
         dt.Load(sqlComm.ExecuteReader());
         Close();
         return dt;
     }
-
 
     public void Log(string text)
     {

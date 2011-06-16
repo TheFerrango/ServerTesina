@@ -33,24 +33,22 @@
 			<p class="byline">
                 <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
             </p>
-            <br />
-            <p class="byline">
-                <asp:Button ID="Button1" runat="server" Text="Button" />
-                <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
-            </p>
 
 			<div class="entry">
 				<p>
-                    <asp:GridView ID="GridView1" runat="server" CellPadding="4" 
-                        EnableModelValidation="True" ForeColor="#333333" GridLines="None" Width="90%">
-                        <AlternatingRowStyle BackColor="White" />
-                        <EditRowStyle BackColor="#2461BF" />
-                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-                        <RowStyle BackColor="#EFF3FB" />
-                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-                    </asp:GridView>
+                    <asp:Label ID="lblPara1" runat="server" Text="Label"></asp:Label>
+                    <asp:TextBox ID="txtPara1" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                    <asp:Label ID="lblPara2" runat="server" Text="Label"></asp:Label>
+                    <asp:TextBox ID="txtpara2" runat="server"></asp:TextBox>
+                </p>
+                <p>
+                <asp:Button ID="btnAdd" Text="Aggiungi" runat="server" onclick="btnAdd_Click"/>
+                </p>
+                    <asp:Label ID="lblStat" runat="server" Visible="false" Text=""></asp:Label>
+
+                <p>
                 </p>
 			</div>
 		</div>
@@ -82,6 +80,9 @@
                         <li>
                             <asp:HyperLink ID="HyperLink3" runat="server" Text="Visualizza l'elenco dei veicoli trainanti"
                                 NavigateUrl="~/visualizzaVari.aspx?tblInd=3"></asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="HyperLink4" runat="server" Text="Visualizza l'elenco degli alianti"
+                                NavigateUrl="~/visualizzaVari.aspx?tblInd=4"></asp:HyperLink></li>
                         
                     </ul>
     </div>

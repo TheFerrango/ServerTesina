@@ -35,7 +35,7 @@
             </p>
             <br />
             <p class="byline">
-                <asp:Button ID="Button1" runat="server" Text="Button" />
+                <asp:Button ID="addBtn" runat="server" Text="Aggiungi" onclick="addBtn_Click" />
                 <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
             </p>
 
@@ -82,6 +82,9 @@
                         <li>
                             <asp:HyperLink ID="HyperLink3" runat="server" Text="Visualizza l'elenco dei veicoli trainanti"
                                 NavigateUrl="~/visualizzaVari.aspx?tblInd=3"></asp:HyperLink></li>
+                            <li>
+                            <asp:HyperLink ID="HyperLink4" runat="server" Text="Visualizza l'elenco degli alianti"
+                                NavigateUrl="~/visualizzaVari.aspx?tblInd=4"></asp:HyperLink></li>
                         
                     </ul>
     </div>

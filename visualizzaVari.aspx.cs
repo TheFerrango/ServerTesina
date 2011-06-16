@@ -31,7 +31,9 @@ public partial class visualizzaVari : System.Web.UI.Page
                         dt = DBI.RetrievePiloti("Pilota"); break;
                     case 2: Label1.Text = "Istruttori"; Label2.Text = "Lista dei piloti istruttori"; Label3.Text = "Aggiungi Istruttore"; 
                         dt = DBI.RetrievePiloti("Istruttore"); break;
-                    case 3: Label1.Text = "Modelli alianti"; Label2.Text = "Lista dei modelli degli alianti registrati"; Label3.Text = "Aggiungi Aliante"; 
+                    case 3: Label1.Text = "Modelli aerei trainanti"; Label2.Text = "Lista dei modelli degli aerei trainanti registrati"; Label3.Text = "Aggiungi Aereo da traino"; 
+                        dt = DBI.RetrieveAereo("ModelloTrainatore"); break;
+                    case 4: Label1.Text = "Modelli Alianti"; Label2.Text = "Lista dei modelli degli alianti registrati"; Label3.Text = "Aggiungi Aliante";
                         dt = DBI.RetrieveAereo("ModelloAliante"); break;
                     default: throw new FormatException(); break;
                 }
@@ -45,5 +47,10 @@ public partial class visualizzaVari : System.Web.UI.Page
                 Label2.Text = "Si prega di selezionare una voce corretta";
             }
         }
+    }
+    protected void addBtn_Click(object sender, EventArgs e)
+    {
+        Session["idTbl"] = Request.QueryString["tblInd"].ToString();
+        Response.Redirect("~/aggiungiElemento.aspx");
     }
 }

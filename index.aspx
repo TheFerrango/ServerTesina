@@ -76,6 +76,8 @@
                                 NavigateUrl="~/visualizzaVari.aspx?tblInd=3"></asp:HyperLink>
                             <asp:TextBox ID="usrPass" TextMode="Password" runat="server"></asp:TextBox></li>
                         <li>
+                            <asp:HyperLink ID="HyperLink4" runat="server" Text="Visualizza l'elenco degli alianti"
+                                NavigateUrl="~/visualizzaVari.aspx?tblInd=4"></asp:HyperLink>
                             <asp:Button ID="lgnButt" Text="LogIn" CausesValidation="true" runat="server" OnClick="lgnButt_Click"
                                 PostBackUrl="~/index.aspx" /></li>
                     </ul>

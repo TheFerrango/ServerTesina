@@ -95,6 +95,12 @@ public class Pilota
         set { _nome = value; }
     }
 
+    public Pilota(string nome, string cognome)
+    {
+        _nome = nome;
+        _cognome = cognome;
+    }
+
     public Pilota()
     {
     }
@@ -156,6 +162,20 @@ public class ModelloAereo
     {
         get { return _model; }
         set { _model = value; }
+    }
+
+    private string _code;
+
+    public string Code
+    {
+        get { return _code; }
+        set { _code = value; }
+    }
+
+    public ModelloAereo(string codice, string modello)
+    {
+        _code = codice;
+        _model = modello;
     }
 
     public ModelloAereo()

@@ -15,6 +15,7 @@ public partial class index : System.Web.UI.Page
             HyperLink1.Visible = false;
             HyperLink2.Visible = false;
             HyperLink3.Visible = false;
+            HyperLink4.Visible = false;
             Label1.Text = "Login";
 
             if (Session["logIn"] != null)

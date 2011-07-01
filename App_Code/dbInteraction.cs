@@ -43,128 +43,94 @@ public class dbInteraction
   public int AddPilot(Pilota pilo)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from Trainatore where nome like '" + pilo.nome + "' and cognome like '" + pilo.cognome + "'", _sqlConn);
-    SqlDataReader sqr = sqlComm.ExecuteReader();
-
-    if (sqr.HasRows)
-    {
-      sqr.Read();
-      int id = (int)sqr[0];
-      sqr.Close();
-      Close();
+    int id = ChkPilot(pilo, "Trainatore");
+    if (id != -1)
       return id;
-    }
-    sqr.Close();
-    sqlComm = new SqlCommand("insertPilot", _sqlConn);
+
+    SqlCommand sqlComm = new SqlCommand("insertPilot", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
 
     sqlComm.Parameters.Add("nome", pilo.nome);
     sqlComm.Parameters.Add("cognome", pilo.cognome);
     sqlComm.ExecuteNonQuery();
+    id = ChkPilot(pilo, "Trainatore");
     Close();
-    return -1;
-  }
+    return id;
+  }  
 
   public int AddPilotAliante(Pilota pilo)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from Pilota where nome like '" + pilo.nome + "' and cognome like '" + pilo.cognome + "'", _sqlConn);
-    SqlDataReader sqr = sqlComm.ExecuteReader();
-
-    if (sqr.HasRows)
-    {
-      sqr.Read();
-      int id = (int)sqr[0];
-      sqr.Close();
-      Close();
+    int id = ChkPilot(pilo, "Pilota");
+    if (id != -1)
       return id;
-    }
-    sqr.Close();
-    sqlComm = new SqlCommand("insertPilotAliante", _sqlConn);
+
+    SqlCommand sqlComm = new SqlCommand("insertPilotAliante", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
 
     sqlComm.Parameters.Add("nome", pilo.nome);
     sqlComm.Parameters.Add("cognome", pilo.cognome);
     sqlComm.ExecuteNonQuery();
+    id = ChkPilot(pilo, "Pilota");
     Close();
-    return -1;
+    return id;
   }
 
   public int AddInstructor(Pilota pilo)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from Istruttore where nome like '" + pilo.nome + "' and cognome like '" + pilo.cognome + "'", _sqlConn);
-    SqlDataReader sqr = sqlComm.ExecuteReader();
-
-    if (sqr.HasRows)
-    {
-      sqr.Read();
-      int id = (int)sqr[0];
-      sqr.Close();
-      Close();
-      return id;
-    }
-    sqr.Close();
-    sqlComm = new SqlCommand("insertIstruttore", _sqlConn);
+    int id = ChkPilot(pilo, "Istruttore");
+    if (id != -1)
+      return id; 
+    SqlCommand sqlComm = new SqlCommand("insertIstruttore", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
 
     sqlComm.Parameters.Add("nome", pilo.nome);
     sqlComm.Parameters.Add("cognome", pilo.cognome);
     sqlComm.ExecuteNonQuery();
+    id = ChkPilot(pilo, "Istruttore");
     Close();
-    return -1;
+    return id;
   }
 
   public int AddModAliante(ModelloAereo mod)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from ModelloAliante where Codice like '" + mod.code + "'", _sqlConn);
-    SqlDataReader sqr = sqlComm.ExecuteReader();
-
-    if (sqr.HasRows)
-    {
-      sqr.Read();
-      int id = (int)sqr[0];
-      sqr.Close();
-      Close();
+    int id = ChkPlane(mod, "ModelloAliante");
+    if (id != -1)
       return id;
-    }
-    sqr.Close();
-    sqlComm = new SqlCommand("insertModelloAliante", _sqlConn);
+    SqlCommand sqlComm = new SqlCommand("insertModelloAliante", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
     sqlComm.Parameters.Add("codice", mod.code);
 
     sqlComm.Parameters.Add("modello", mod.model);
 
     sqlComm.ExecuteNonQuery();
+    id = ChkPlane(mod, "ModelloAliante");
     Close();
-    return -1;
+    return id;
   }
 
   public int AddModTrainatore(ModelloAereo mod)
   {
     Connect();
-    SqlCommand sqlComm = new SqlCommand("Select * from ModelloTrainatore where Codice like '" + mod.code + "'", _sqlConn);
-    SqlDataReader sqr = sqlComm.ExecuteReader();
-
-    if (sqr.HasRows)
-    {
-      sqr.Read();
-      int id = (int)sqr[0];
-      sqr.Close();
-      Close();
+    
+    int id = ChkPlane(mod, "ModelloTrainatore");
+    if (id != -1)
       return id;
-    }
-    sqr.Close();
-    sqlComm = new SqlCommand("insertModelloTrainatore", _sqlConn);
+
+    SqlCommand sqlComm = new SqlCommand("insertModelloTrainatore", _sqlConn);
     sqlComm.CommandType = System.Data.CommandType.StoredProcedure;
 
     sqlComm.Parameters.Add("codice", mod.code);
     sqlComm.Parameters.Add("modello", mod.model);
     sqlComm.ExecuteNonQuery();
+    id = ChkPlane(mod, "ModelloTrainatore");
     Close();
-    return -1;
+    return id;
   }
+
+  
 
   public int AddGiornata(SessioneGiorno sg)
   {
@@ -205,6 +171,38 @@ public class dbInteraction
     sqlComm.Parameters.Add("tempo", tr.TempoOrametro);
     sqlComm.ExecuteNonQuery();
     Close();
+    return -1;
+  }
+
+  private int ChkPilot(Pilota pilo, string tabella)
+  {
+    SqlCommand sqlComm = new SqlCommand("Select * from " + tabella + " where nome like '" + pilo.nome + "' and cognome like '" + pilo.cognome + "'", _sqlConn);
+    SqlDataReader sqr = sqlComm.ExecuteReader();
+
+    if (sqr.HasRows)
+    {
+      sqr.Read();
+      int id = (int)sqr[0];
+      sqr.Close();
+      return id;
+    }
+    sqr.Close();
+    return -1;
+  }
+
+  private int ChkPlane(ModelloAereo mod, string tabella)
+  {
+    SqlCommand sqlComm = new SqlCommand("Select * from " + tabella + " where Codice like '" + mod.code + "'", _sqlConn);
+    SqlDataReader sqr = sqlComm.ExecuteReader();
+
+    if (sqr.HasRows)
+    {
+      sqr.Read();
+      int id = (int)sqr[0];
+      sqr.Close();
+      return id;
+    }
+    sqr.Close();
     return -1;
   }
 

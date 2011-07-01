@@ -14,20 +14,26 @@ public static class DeSerializeSupport
 
   public static void ElaboraSessioni(dbInteraction DBI, JSONObject coop)
   {
+    bool[] trainiEff = new bool[coop.trainiEff.Count];
     foreach (SessioneGiorno sg in coop.sessioni)
     {
       int idSessione = DBI.AddGiornata(sg);
       for (int i = 0; i < coop.trainiEff.Count; i++)
       {
-        Traini tr = coop.trainiEff[i];
-        tr.IDGiornata = idSessione;
-        coop.trainiEff[i] = tr;
+        if (!trainiEff[i])
+        {
+          Traini tr = coop.trainiEff[i];
+          tr.IDGiornata = idSessione;
+          coop.trainiEff[i] = tr;
+          trainiEff[i] = true;
+        }
       }
     }
   }
 
   public static void ElaboraAereiDaTraino(dbInteraction DBI, JSONObject coop)
   {
+    bool[] sessione = new bool[coop.sessioni.Count];
     foreach (ModelloAereo ma in coop.aereiTrainanti)
     {
       int idAereo = DBI.AddModTrainatore(ma);
@@ -35,9 +41,13 @@ public static class DeSerializeSupport
       {
         for (int i = 0; i < coop.sessioni.Count; i++)
         {
-          SessioneGiorno sg = coop.sessioni[i];
-          sg.IDModTrainatore = idAereo;
-          coop.sessioni[i] = sg;
+          if(!sessione[i] && ma.id == coop.sessioni[i].IDModTrainatore)
+          {
+            SessioneGiorno sg = coop.sessioni[i];
+            sg.IDModTrainatore = idAereo;
+            coop.sessioni[i] = sg;
+            sessione[i] = true;
+          }
         }
       }
     }
@@ -45,6 +55,7 @@ public static class DeSerializeSupport
 
   public static void ElaboraAlianti(dbInteraction DBI, JSONObject coop)
   {
+    bool[] trainiEff = new bool[coop.trainiEff.Count];
     foreach (ModelloAereo ma in coop.alianti)
     {
       int idAliante = DBI.AddModAliante(ma);
@@ -52,9 +63,13 @@ public static class DeSerializeSupport
       {
         for (int i = 0; i < coop.trainiEff.Count; i++)
         {
-          Traini tr = coop.trainiEff[i];
-          tr.IDAliante = idAliante;
-          coop.trainiEff[i] = tr;
+          if (!trainiEff[i] && ma.id == coop.trainiEff[i].IDAliante)
+          {
+            Traini tr = coop.trainiEff[i];
+            tr.IDAliante = idAliante;
+            coop.trainiEff[i] = tr;
+            trainiEff[i] = true;
+          }
         }
       }
     }
@@ -62,6 +77,7 @@ public static class DeSerializeSupport
 
   public static void ElaboraIstruttori(dbInteraction DBI, JSONObject coop)
   {
+    bool[] trainiEff = new bool[coop.trainiEff.Count];
     foreach (Pilota p in coop.instructors)
     {
       int idPilot = DBI.AddInstructor(p);
@@ -69,9 +85,13 @@ public static class DeSerializeSupport
       {
         for (int i = 0; i < coop.trainiEff.Count; i++)
         {
-          Traini tr = coop.trainiEff[i];
-          tr.IDIstruttore = idPilot;
-          coop.trainiEff[i] = tr;
+          if (!trainiEff[i] && p.id == coop.trainiEff[i].IDIstruttore)
+          {
+            Traini tr = coop.trainiEff[i];
+            tr.IDIstruttore = idPilot;
+            coop.trainiEff[i] = tr;
+            trainiEff[i] = true;
+          }
         }
       }
     }
@@ -79,6 +99,7 @@ public static class DeSerializeSupport
 
   public static void ElaboraPilotiAlianti(dbInteraction DBI, JSONObject coop)
   {
+    bool[] trainiEff = new bool[coop.trainiEff.Count];
     foreach (Pilota p in coop.pilsAli)
     {
       int idPilot = DBI.AddPilotAliante(p);
@@ -86,9 +107,13 @@ public static class DeSerializeSupport
       {
         for (int i = 0; i < coop.trainiEff.Count; i++)
         {
-          Traini tr = coop.trainiEff[i];
-          tr.IDPilota = idPilot;
-          coop.trainiEff[i] = tr;
+          if (!trainiEff[i] && p.id == coop.trainiEff[i].IDPilota)
+          {
+            Traini tr = coop.trainiEff[i];
+            tr.IDPilota = idPilot;
+            coop.trainiEff[i] = tr;
+            trainiEff[i] = true;
+          }
         }
       }
     }
@@ -96,6 +121,7 @@ public static class DeSerializeSupport
 
   public static void ElaboraTrainatori(dbInteraction DBI, JSONObject coop)
   {
+    bool[] sessioni = new bool[coop.sessioni.Count];
     foreach (Pilota p in coop.pils)
     {
       int idPilot = DBI.AddPilot(p);
@@ -103,9 +129,13 @@ public static class DeSerializeSupport
       {
         for (int i = 0; i < coop.sessioni.Count; i++)
         {
-          SessioneGiorno sg = coop.sessioni[i];
-          sg.IDTrainatore = idPilot;
-          coop.sessioni[i] = sg;
+          if (!sessioni[i] && coop.sessioni[i].IDTrainatore == p.id)
+          {            
+            SessioneGiorno sg = coop.sessioni[i];
+            sg.IDTrainatore = idPilot;
+            coop.sessioni[i] = sg;
+            sessioni[i] = true;
+          }
         }
       }
     }

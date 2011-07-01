@@ -32,10 +32,12 @@
         <div id="content">
             <div class="post">
                 <h2 class="title">
-                    &nbsp;<asp:Label ID="lblTitle" runat="server" Text="Label"></asp:Label>
+                    &nbsp;<asp:Label ID="lblTitle" 
+                        runat="server" Text="Benvenuto!"></asp:Label>
                 </h2>
                 <p class="byline">
-                    <asp:Label ID="lblSubTitle" runat="server" Text="Label"></asp:Label>
+                    <asp:Label ID="lblSubTitle" runat="server" 
+                        Text="Per cominciare, inserisci i tuoi dati"></asp:Label>
                 </p>
                 <div class="entry">
                     <p>

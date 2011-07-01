@@ -11,6 +11,7 @@ public class JsonHandler : IHttpHandler
     {
         if (context.Request["traino"] != null)
         {
+            Log(context.Request["traino"].ToString());
             try
             {
                 dbInteraction DBI = new dbInteraction();
@@ -30,7 +31,7 @@ public class JsonHandler : IHttpHandler
                 DeSerializeSupport.ElaboraSessioni(DBI, coop);
                 //Traini effettuati
                 DeSerializeSupport.ElaboraTraini(DBI, coop);
-                Log(DeSerializeSupport.Serializzo());
+                //Log(DeSerializeSupport.Serializzo());
             }
             catch (Exception e)
             {
